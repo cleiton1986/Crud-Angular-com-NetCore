@@ -1,12 +1,7 @@
 
 
 <div class="form-control">
-    
-        <div class="header boder-light rounded p-5 shadow"  *ngIf="formulario">
-        
-            <h6>{{tituloFormulario}}</h6>
-            <hr/>
-
+    <div class="header boder-light rounded p-5 shadow">
             <form [formGroup]="formulario"  (ngSubmit)="onSubmit()">
                 <button type="button" class="btn btn-secondary" (click)="onExbirFormCadastro()">
                     Pessoa
@@ -26,7 +21,7 @@
                         <tr *ngFor="let pessoa of pessoas" class="col-sm-4">
                              
                             <td>{{pessoa.nome}}</td>
-                            <td>{{pessoa.sobrenome}}</td>
+                            <td>{{pessoa.sobreNome}}</td>
                             <td>{{pessoa.idade}}</td>
                             <td>{{pessoa.profissao}}</td>
                             <td>
@@ -36,19 +31,6 @@
                                 </button>
                             </td>
                         </tr>
-                     
-                        <!--
-                        <tr>
-                
-                            @for (pessoa of pessoas; track pessoa) {
-                                <td>{{pessoa.nome}}</td>
-                                <td>{{pessoa.sobrenome}}</td>
-                                <td>{{pessoa.idade}}</td>
-                                <td>{{pessoa.profissao}}</td>
-                              }
-                                  
-                        </tr>
-                -->
                     </tbody>
              </table>
               </div>
@@ -59,33 +41,25 @@
             <br>
                
                <div class="row" *ngIf="visibilidadeForm">
-                <div >
+                <div   *ngIf="formulario">
+                <h6>{{tituloFormulario}}</h6>
+                <hr/>
                 <div class="from-group" >
                     <label>Nome</label>
 
                      <input type="text" class="form-control form-control-sm" formControlName="nome">
-                     
-                     <!--
-                      //Modo antigo
-                       <p *ngIf="formulario.controls['nome'].invalid">
-                        Campo nome e obrigatório.
-                    </p>
-                     -->
-                     <p *ngIf="formulario.controls.nome.invalid">
+                     <p *ngIf="formulario.controls.nome.invalid" class="alert alert-danger">
                         Campo nome e obrigatório.
                     </p>
                 </div>
-                
                 <div class="from-group">
                     <label>SobreNome</label>
                      <input type="text" class="form-control form-control-sm" formControlName="sobreNome">
                 </div>
-                
                 <div class="from-group">
                     <label>Idade</label>
                      <input type="number" class="form-control form-control-sm" formControlName="idade">
                 </div>
-                
                 <div class="from-group">
                     <label>Profissão</label>
                      <input type="text" class="form-control form-control-sm" formControlName="profissao">
@@ -97,10 +71,7 @@
 
                </div>
             </div>
-              
-            
-            </form>
-        
+         </form>  
     </div>
 </div>
 
@@ -114,7 +85,6 @@
     <div class="modal-body">
       Prosseguir com a exclusão do(a) {{nomePessoa}}
     </div>
-
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modalRef.hide()">Não</button>
         <button type="button" class="btn btn-outline-danger" (click)="ExcluirPessoa(pessoaId)">Sim</button>

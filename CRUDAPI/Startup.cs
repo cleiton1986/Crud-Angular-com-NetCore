@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CRUDAPI.Models;
-using Microsoft.EntityFrameworkCore;
-
 namespace CRUDAPI
 {
     public class Startup
@@ -18,11 +11,14 @@ namespace CRUDAPI
         // This method gets called by the runtime. Use this method to add serices to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddCors();
             //services.AddSwagerGen();
-            services.AddDbContext<Contexto>(opcoes => opcoes.UseSqlServer(Configuration.GetConnectionString("ConexaoBD")));
+            ConfigureService.AddServices(services, Configuration);
+            //ConfigureRepository.AddServices(services);
+           // services.AddDbContext<Contexto>(opcoes => opcoes.UseSqlServer(Configuration.GetConnectionString("ConexaoBD")));
             services.AddControllersWithViews();
         }
 
@@ -52,5 +48,10 @@ namespace CRUDAPI
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
         }
+
+
     }
+
+    
+    
 }

@@ -1,7 +1,7 @@
 export class Pessoa {
     pessoaId: number;
     nome: string;
-    sobrenome: string;
+    sobreNome: string;
     idade: number;
     profissao: string;
 }

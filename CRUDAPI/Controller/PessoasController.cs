@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CRUDAPI.AppService.Interfaces;
 using CRUDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace CRUDAPI.Controller
 {
@@ -15,66 +10,58 @@ namespace CRUDAPI.Controller
     [AllowAnonymous]
     public class PessoasController : ControllerBase
     {
-        private readonly Contexto _contexto;
-
-        public PessoasController(Contexto contexto)
+        private readonly IPessoaAppService _iPessoaAppService;
+        public PessoasController(IPessoaAppService iPessoaAppService)
         {
-            _contexto = contexto;
+            _iPessoaAppService = iPessoaAppService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pessoa>>> GetAsync()
         {
-            return await _contexto.Pessoas.ToListAsync();
+            return await _iPessoaAppService.ObterTodosAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Pessoa>> ObterPorIdAsync(int id)
         {
-            var pessoa = await _contexto.Pessoas.FindAsync(id);
+            var pessoa = await _iPessoaAppService.ObterPorIdAsync(id);
+
             if(pessoa == null)
                return NotFound();
             
-            return pessoa;
-            
+             return pessoa;
         }
 
         [HttpPost]
         public async Task<ActionResult<Pessoa>> SalvarAsync(Pessoa pessoa)
         {
-            await _contexto.Pessoas.AddAsync(pessoa);
-            await _contexto.SaveChangesAsync();
-            return Ok();
+            var resultado = await _iPessoaAppService.SalvarAsync(pessoa);
+            if(!resultado)
+              return NotFound();
+
+             return Ok(new {Sucesso = resultado, mensagem = ""});
         }
-    //   [HttpGet("{menuId}/getAllMenusItems")]
+   
         [HttpPut]
         public async Task<ActionResult> AtualizarAsync(Pessoa pessoa)
         {
-            _contexto.Pessoas.Update(pessoa);
-            await _contexto.SaveChangesAsync();
-            return Ok();
+            var resultado = await _iPessoaAppService.AtualizarAsync(pessoa);
+            if(!resultado)
+              return NotFound();
+
+            return Ok(new {Sucesso = resultado, mensagem = ""});
         }
     
         [HttpDelete("{id}")]
         public async Task<ActionResult> ExcluirAsync(int id){
-            var pessoa = await _contexto.Pessoas.FindAsync(id);
-             
-             if(pessoa == null)
+            var resultado = await _iPessoaAppService.ExcluirAsync(id);
+            if(!resultado)
               return NotFound();
 
-             _contexto.Remove(pessoa);
-            await _contexto.SaveChangesAsync();
-            return Ok();
+            return Ok(new {Sucesso = resultado, mensagem = ""});
         }
 
-       //[HttpGet]
-        //public ActionResult<Pessoa> ObterTeste()
-        //{
-          //  var pessoa = "Teste de Requisição";
-            
-            //return Ok(pessoa);
-            
-        //}
 
     }
 }

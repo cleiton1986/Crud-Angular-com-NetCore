@@ -161,3 +161,4 @@ C:\Users\cleit\Desktop\Cursos_Undemy\Angular\CRUDAngularWebAPI\crudapi\obj\Debug
 C:\Users\cleit\Desktop\Cursos_Undemy\Angular\CRUDAngularWebAPI\crudapi\obj\Debug\net9.0\CRUDAPI.pdb
 C:\Users\cleit\Desktop\Cursos_Undemy\Angular\CRUDAngularWebAPI\crudapi\obj\Debug\net9.0\CRUDAPI.genruntimeconfig.cache
 C:\Users\cleit\Desktop\Cursos_Undemy\Angular\CRUDAngularWebAPI\crudapi\obj\Debug\net9.0\ref\CRUDAPI.dll
+C:\Users\cleit\Desktop\Cursos_Undemy\Angular\CRUDAngularWebAPI\CRUDAPI\obj\Debug\net9.0\CRUDAPI.sourcelink.json

@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { PessoasService } from '../../pessoas.service';
 import { Pessoa } from '../../Pessoa';
 import { BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-pessoas',
@@ -14,42 +15,6 @@ import { BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
   styleUrl: './pessoas.component.css',
   providers: [BsModalService]
 })
-
-
-//Modo Antigo
-
-/*
-
-/*  
-//Modo Antigo
-export class PessoasComponent implements OnInit{
-    
-  formulario: any;
-  tituloFormulario: string;
-   
-  constructor(){}
-  
-  ngOnInit(): void {
-    this.tituloFormulario = 'Nova Pessoa';
-
-     this.formulario = new FormGroup({
-      nome: new FormControl(null),
-      sobrenome: new FormControl(null),
-      idade: new FormControl(null),
-      profissao: new FormControl(null)
-  }); 
-
-  }
-
-}
-
-*/
-
-
-
-
-
-/* */
 
 //Modo Novo Angular 14
 export class PessoasComponent{
@@ -63,17 +28,7 @@ export class PessoasComponent{
   
   visibilidadeTabela: boolean = true;
   visibilidadeForm: boolean = false;
-
   modalRef: BsModalRef;
-  
-
-
- //pessoas : any = {
-      //nome: '',
-      //sobrenome: '',
-      //idade: 0,
-     // profissao: ''
-  //};
 
   private formBuilderService = inject(FormBuilder);
   
@@ -85,83 +40,39 @@ export class PessoasComponent{
       profissao: ['', Validators.required]
   })
 
-
   private pessoasService = inject(PessoasService);
   modalService = inject(BsModalService);
  
-  
   constructor(){
    
-    /** */
-   
-   // const pessoa: any  = this.formulario.value;
     this.pessoasService.getTodos().subscribe(resultado => {
       this.pessoas = resultado;
       
-      console.log(resultado)
     })
   }
- 
-
-
-
-  
-
-
-/*
-  //Modo antigo
-  construtor(private pessoasService: PessoasService){}
-
-  this.pessoasService.getTodos().subscribe(resultado => {
-    
-  })
-
-*/
-  
-  //private pessoasService = inject(PessoasService);
 
   onAtualizar(pessoaId:any){
-  
-    console.log(pessoaId)
     this.visibilidadeTabela = false;
     this.visibilidadeForm = true;
+    this.tituloFormulario = '';
 
-    this.pessoas = [];
     this.pessoasService.getId(pessoaId).subscribe(resultado =>{
-       
-      //this.pessoas[0].nome = resultado.nome;
-      //this.pessoas[0].sobrenome = resultado.sobrenome;
-      //this.pessoas[0].idade = resultado.idade;
-      //this.pessoas[0].profissao = resultado.profissao;
-      //this.pessoas[0].pessoaId = resultado.pessoaId;
-     
-      this.tituloFormulario =`Atualizar ${resultado.nome} ${resultado.sobrenome}`; 
-      
-      //const pessoas = new Pessoa();
-      //this.pessoas.map(function(p) {
-        //return p = resultado;
-      //});
-      this.formulario = this.formBuilderService.group({
- 
+       //console.log(resultado)
+
+    this.tituloFormulario =`Atualizar ${resultado.nome} ${resultado.sobreNome}`; 
+    this.formulario = this.formBuilderService.group({
         nome: [resultado.nome],
         idade: [resultado.idade],
-        sobreNome: [resultado.sobrenome],
+        sobreNome: [resultado.sobreNome],
         profissao: [resultado.profissao]
     })
-  
-
-        
-        
    }) 
 
   }
 
-
   onExbirFormCadastro(){
     this.visibilidadeTabela = false;
     this.visibilidadeForm = true;
-    //console.log(this.Pessoa);
-     //const formPessoa = this.formulario.value;
      const pessoa: any  = this.formulario.value;
      this.pessoasService.getTodos().subscribe(resultado => {
       this.pessoas = resultado;
@@ -190,17 +101,16 @@ export class PessoasComponent{
         alert('Pessoa Inserida com sucesso!');
       });
     }
-
-   }
-   
+  }
    
   voltar(){
      this.visibilidadeTabela = true;
      this.visibilidadeForm = false;
+     this.pessoasService.getTodos().subscribe(resultado => {
+        this.pessoas = resultado;
+    })
   }
 
-
-  
   ExibirConfirmacaoExclusao(pessoaId: any, nomePessoa: any, conteudoModal: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(conteudoModal);
     this.pessoaId = pessoaId;
