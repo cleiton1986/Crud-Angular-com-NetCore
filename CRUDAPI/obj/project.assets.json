@@ -4780,11 +4780,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cleit\\Desktop\\Cursos_Undemy\\Angular\\CRUDAngularWebAPI\\crudapi\\CRUDAPI.csproj",
+      "projectUniqueName": "C:\\Users\\cleit\\Desktop\\Estudo\\Crud-Angular-com-NetCore-main\\CRUDAPI\\CRUDAPI.csproj",
       "projectName": "CRUDAPI",
-      "projectPath": "C:\\Users\\cleit\\Desktop\\Cursos_Undemy\\Angular\\CRUDAngularWebAPI\\crudapi\\CRUDAPI.csproj",
+      "projectPath": "C:\\Users\\cleit\\Desktop\\Estudo\\Crud-Angular-com-NetCore-main\\CRUDAPI\\CRUDAPI.csproj",
       "packagesPath": "C:\\Users\\cleit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cleit\\Desktop\\Cursos_Undemy\\Angular\\CRUDAngularWebAPI\\crudapi\\obj\\",
+      "outputPath": "C:\\Users\\cleit\\Desktop\\Estudo\\Crud-Angular-com-NetCore-main\\CRUDAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
