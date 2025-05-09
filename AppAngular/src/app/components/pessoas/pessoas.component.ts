@@ -138,7 +138,6 @@ export class PessoasComponent{
       profissao: ['', Validators.required],
       pessoaId: [0]
     });
-  
 
   }
 
